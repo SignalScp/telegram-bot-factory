@@ -5,6 +5,7 @@
 """
 
 import aiohttp
+import asyncio
 import logging
 from typing import List, Dict, Optional
 
@@ -14,7 +15,7 @@ logger = logging.getLogger(__name__)
 class OnlySqAPI:
     """Клиент для OnlySq API"""
 
-    BASE_URL = "https://api.onlysq.ru/v1"
+    BASE_URL = "https://api.onlysq.ru/ai/openai"
 
     def __init__(self):
         self.session: Optional[aiohttp.ClientSession] = None
@@ -63,7 +64,7 @@ class OnlySqAPI:
 
         try:
             async with session.post(
-                f"{self.BASE_URL}/chat/completions",
+                f"{self.BASE_URL}/v1/chat/completions",
                 json=payload,
                 timeout=aiohttp.ClientTimeout(total=30)
             ) as response:
@@ -118,6 +119,3 @@ class OnlySqAPI:
         """Закрыть сессию"""
         if self.session and not self.session.closed:
             await self.session.close()
-
-
-import asyncio
