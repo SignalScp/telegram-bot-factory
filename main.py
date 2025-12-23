@@ -10,6 +10,7 @@ import os
 import json
 from typing import Dict, Optional
 from datetime import datetime
+from dotenv import load_dotenv
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
@@ -25,6 +26,9 @@ from telegram.ext import (
 from bot_manager import BotManager
 from onlysq_api import OnlySqAPI
 from database import Database
+
+# Загрузка переменных окружения
+load_dotenv()
 
 # Логирование
 logging.basicConfig(
